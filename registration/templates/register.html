@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+        <title>Awesome Website</title>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="header">
+                <img src="{{ url_for('static', filename='img/redpanda_transparent.png') }}" alt="">
+                {% if 'user' not in session %}
+                <form action="/login" method="post">
+                    <input type="text" name="email" placeholder="Email address">
+                    <input type="password" name="password" placeholder="Password">
+                    <input type="submit" name="submit" value="Login">
+                </form>
+                {% endif %}
+            </div>
+            <div id="nav">
+                <ul>
+                    {% if 'user' not in session %}
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/register">Register</a></li>
+                    {% else %}
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/user">User Dashboard</a></li>
+                            <li><a href="/wall">Wall</a></li>
+                            <li><a href="/logout">Logout</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div id="content">
+                <h3>Register for an Account:</h3>
+                {% with messages = get_flashed_messages(with_categories = true) %}
+                    {% if messages %}
+                        {% for error, message in messages %}
+                            <p>{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %} 
+                <form action="/submit" method="post">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><label for="first_name">First Name: </label></td>
+                                <td><input type="text" name="first_name" placeholder="First name"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="last_name">Last Name: </label></td>
+                                <td><input type="text" name="last_name" placeholder="Last name"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="email">Email Address: </label></td>
+                                <td><input type="text" name="email" placeholder="Email address"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="password">Password: </label></td>
+                                <td><input type="password" name="password" placeholder="Password"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="password_confirm">Confirm Password: </label></td>
+                                <td><input type="password" name="password_confirm" placeholder="Confirm password"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <input type="submit" name="submit" value="Register" id="submit">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

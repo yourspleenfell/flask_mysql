@@ -1,0 +1,38 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+#wrapper {
+    width: 100%;
+    margin: auto;
+}
+h1 {
+    font-size: 30pt;
+    font-variant: small-caps;
+}
+table{
+    padding: 5px;
+    border: 1px solid #000;
+}
+thead {
+    font-weight: bold;
+}
+tr:nth-child(even) {
+    background: #999999;
+}
+tr:nth-chld(odd) {
+    background: #FFF;
+}
+#add_friend{
+    width: 300px;
+}
+label {
+    display: inline-block;
+    width: 70px;
+}
+.text {
+    margin-top: 10px;
+    width: 200px;
+}
+.button {
+    margin: 10px 0px 0px 215px;
+}

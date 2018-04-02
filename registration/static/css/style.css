@@ -1,0 +1,70 @@
+#wrapper {
+    width: 1000px;
+    margin: 0px auto;
+    overflow: hidden;
+    background: #c1c4c9;
+}
+#header {
+    display: inline-block;
+    padding: 5px;
+    width: 990px;
+    height: 38px;
+    background: linear-gradient(#e5e6e8, #c1c4c9);
+}
+#header img {
+    position: absolute;
+    margin: 0px 0px 0px 10px;
+    max-width: 100px;
+}
+#header h1 {
+    margin: 20px 338px 0px 110px;
+    display: inline-block;
+    font-variant: small-caps;
+}
+#header form {
+    display: inline-block;
+    margin: 10px 0px 5px 580px;
+}
+#header p {
+    display: inline-block;
+    margin-left: 560px;
+}
+#nav {
+    text-align: right;
+    display: inline-block;
+    width: 100%;
+    border-bottom: 3px solid #999da3;
+}
+#nav li {
+    display: inline;
+    margin: 0px 10px;
+    padding-right: 20px;
+    font-variant: small-caps;
+    border-right: 1px inset;
+}
+a {
+    text-decoration: none;
+    color: #1f1f1f;
+}
+a:hover {
+    color: #fff;
+}
+body img {
+    max-width: 1000px;
+}
+#content {
+    padding: 10px;
+}
+h3 {
+    font-variant: small-caps;
+}
+textarea {
+    display: block;
+    resize: none;
+}
+#post {
+    margin: 10px 0px 10px 610px;
+}
+.comments {
+    margin-left: 30px;
+}

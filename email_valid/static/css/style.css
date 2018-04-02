@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+#wrapper {
+    width: 500px;
+    margin: auto;
+    padding-top: 50px;
+}
+#errors {
+    font-variant: small-caps;
+}
+#add_email {
+    width: 500px;
+}
+.text {
+    width: 250px;
+}
+.button {
+    margin: 10px 0px 0px 307px;
+}
+#error {
+    width: 250px;
+    margin: 0px 40px 20px 60px;
+    padding: 5px;
+    color: #FFF;
+    text-align: center;
+    background-color: #FF0000;
+    border: 1px solid #000;
+}
+#success {
+    width: 250px;
+    margin: 0px 40px 20px 60px;
+    padding: 5px;
+    color: #FFF;
+    text-align: center;
+    background-color: #34ba45;
+    border: 1px solid #000;
+}
+thead {
+    font-weight: bold;
+    text-align: center;
+}
