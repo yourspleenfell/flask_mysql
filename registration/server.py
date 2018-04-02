@@ -163,4 +163,16 @@ def comment():
         flash('Comment successfully posted', 'success')    
         return redirect('/wall')
 
+@app.route('/delete', methods=['POST'])
+def delete():
+    message_id = request.form['delete_message']
+    print delete
+    delete_query = 'DELETE FROM messages WHERE messages.message_id = :message_id'
+    delete_data = {
+                'message_id': message_id
+            }
+    mysql.query_db(delete_query, delete_data)
+    flash('Message successfully deleted', 'success')
+    return redirect('/wall')
+
 app.run(debug=True)

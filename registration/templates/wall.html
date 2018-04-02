@@ -46,6 +46,12 @@
                 </form>
                 {% for post in all_messages | reverse %}
                     <h4>{{ post.first_name }} {{post.last_name}} / {{ post.created_at }}</h4>
+                    {% if post.user_id == session['user'] %}
+                        <form action="/delete" method="post">
+                            <input type="submit" name="delete" value="Delete">
+                            <input type="hidden" name="delete_message" value="{{ post.message_id }}">
+                        </form>
+                    {% endif %}
                     <p>{{ post.message }}</p>
                     {% for comment in all_comments | reverse %}
                         {% if comment.message_id == post.message_id %}

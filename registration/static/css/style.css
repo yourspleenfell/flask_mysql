@@ -55,7 +55,7 @@ body img {
 #content {
     padding: 10px;
 }
-h3 {
+h3, h4 {
     font-variant: small-caps;
 }
 textarea {
