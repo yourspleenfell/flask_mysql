@@ -23,7 +23,6 @@ def login():
     password = request.form['password']
     user_query = 'SELECT * FROM users WHERE users.email =:email LIMIT 1'
     query_data = {
-             'id': id,
              'email': email,
              'password': password
            }
@@ -34,18 +33,16 @@ def login():
     if len(request.form['password']) is 0:
         error = True
         flash('You must enter a password to login', 'error')
-    if error:
-        return redirect('/')
-    if user[0]['email'] != request.form['email']:
+    if len(user) == 0:
         error = True
         flash('You have entered an incorrect email', 'error')
-    if user[0]['password'] != md5.new(password).hexdigest():
+    elif len(user) != 0:
+        encrypted_password = md5.new(password).hexdigest()
+    if user[0]['password'] != encrypted_password:
         error = True
         flash('You have entered an incorrect password', 'error')
     if error:
         return redirect('/')
-    if len(user) != 0:
-        encrypted_password = md5.new(password).hexdigest()
     if user[0]['password'] == encrypted_password:
         session['user'] = user[0]['user_id']
         session['name'] = user[0]['first_name']
@@ -100,6 +97,7 @@ def submit():
             }
         mysql.query_db(query, data)
         session['email'] = request.form['email']
+        session['name'] = request.form['first_name']
         flash('Thank you for registering an account ' + request.form['first_name'] + ' ' + request.form['last_name'], 'success')
         return redirect('/user')
 
@@ -118,6 +116,7 @@ def user():
 @app.route('/logout')
 def logout():
     session.clear()
+    flash('Thanks for visiting, see you soon!', 'success')
     return redirect('/')
 
 @app.route('/wall')
@@ -126,9 +125,9 @@ def wall():
         flash('You must log in to view the wall', 'error')
         return redirect('/')
     else:
-        message_query = 'SELECT * FROM messages JOIN users ON users.user_id = messages.user_id'
+        message_query = 'SELECT messages.message_id, messages.message, messages.created_at, messages.updated_at, users.user_id, users.first_name, users.last_name FROM messages JOIN users ON users.user_id = messages.user_id'
         messages = mysql.query_db(message_query)
-        comment_query = 'SELECT * FROM comments JOIN messages on messages.message_id = comments.message_id JOIN users ON users.user_id = comments.user_id'
+        comment_query = 'SELECT comments.id, comments.comment, comments.created_at, comments.updated_at, messages.message_id, users.user_id, users.first_name, users.last_name FROM comments JOIN messages on messages.message_id = comments.message_id JOIN users ON users.user_id = comments.user_id'
         comments = mysql.query_db(comment_query)
         return render_template('/wall.html', all_messages = messages, all_comments = comments)
 
@@ -166,11 +165,8 @@ def comment():
 @app.route('/delete', methods=['POST'])
 def delete():
     message_id = request.form['delete_message']
-    print delete
     delete_query = 'DELETE FROM messages WHERE messages.message_id = :message_id'
-    delete_data = {
-                'message_id': message_id
-            }
+    delete_data = { 'message_id': message_id }
     mysql.query_db(delete_query, delete_data)
     flash('Message successfully deleted', 'success')
     return redirect('/wall')

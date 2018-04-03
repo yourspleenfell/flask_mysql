@@ -68,3 +68,7 @@ textarea {
 .comments {
     margin-left: 30px;
 }
+#header span{
+    margin: 10px 10px 0px 0px;
+    float: right;
+}
