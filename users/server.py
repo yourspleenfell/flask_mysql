@@ -19,9 +19,6 @@ def index():
 @app.route('/users')
 def users():
     user_query = 'SELECT users.id, users.first_name, users.last_name, users.email, users.created_at, users.updated_at FROM users'
-    # user_data = {
-    #                 'id': id,
-    #             }
     users = mysql.query_db(user_query)
     return render_template('index.html', users=users)
 
