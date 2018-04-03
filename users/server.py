@@ -1,13 +1,6 @@
 from flask import Flask, request, redirect, render_template, session, flash
 from mysqlconnection import MySQLConnector
 
-import re
-import md5
-
-EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-NAME_REGEX = re.compile(r'^[a-zA-Z]+$')
-PWD_REGEX = re.compile(r'(?=.*[A-Z])(?=.*[0-9])')
-
 app = Flask(__name__)
 app.secret_key= "SecretKeyForTheMostSecretCircumstances"
 mysql = MySQLConnector(app,'users')
